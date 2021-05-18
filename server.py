@@ -3,7 +3,7 @@ from _thread import *
 import sys
 import pickle
 
-from testobj import TestObj
+from player import Player
 
 
 server = "192.168.1.244"
@@ -20,7 +20,7 @@ s.listen(2)
 print("Waiting for a connection, Server Started")
 
 
-players = [TestObj("Player 1"), TestObj("Player 2")]
+players = [Player(0, 0, (255, 0, 0)), Player(300, 300, (0, 255, 0))]
 
 
 def threaded_client(conn, currentPlayer):
