@@ -2,11 +2,13 @@ import pygame
 
 from player import Player
 
+
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
 
 win = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Dual")
+
 
 def main():
     run = True
@@ -23,20 +25,20 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        
+
         playerX_change = movementX(p, p2)
         playerY_change = movementY(p, p2)
-        
+
         win.fill((0, 0, 0))
         pygame.draw.rect(win, p.colors, p.get_dimensions())
         pygame.draw.rect(win, p2.colors, p2.get_dimensions())
-        
+
         if bullet_state is "ready":
             bulletX = p2.x + 22.5
             bulletY = p2.y
             bulletX_change = playerX_change
             bulletY_change = 6 + playerY_change
-        
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and bullet_state is "ready":
             bullet_state = "fire"
@@ -53,16 +55,17 @@ def main():
                     pHealth -= 50
                     p.colors = (pHealth, 0, 0)
                     bullet_state = "ready"
-                    
+
         pygame.display.update()
-        
+
         if pHealth <= 0:
             pygame.quit()
-        
+
+
 def movementX(p, p2):
     keys = pygame.key.get_pressed()
     retVal = 0
-    
+
     if keys[pygame.K_LEFT]:
         if (p.x >= p.vel):
             p.x -= p.vel
@@ -78,8 +81,9 @@ def movementX(p, p2):
         if (p2.x <= 450-p.vel):
             p2.x += p2.vel
             retVal = p2.vel
-            
+
     return retVal
+
 
 def movementY(p, p2):
     keys = pygame.key.get_pressed()
@@ -102,9 +106,12 @@ def movementY(p, p2):
             retVal = p2.vel/2
 
     return retVal
+
+
 def fireBullet(x,y):
     #global bullet_state
     #bullet_state = "fire"
-    pygame.draw.rect(win, (0,255,0), (x, y, 5, 5)) 
-    
+    pygame.draw.rect(win, (0,255,0), (x, y, 5, 5))
+
+
 main()
