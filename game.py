@@ -1,6 +1,7 @@
 import pygame
 
 from player import Player
+from bullet import Bullet
 
 
 SCREEN_WIDTH = 500
@@ -16,7 +17,7 @@ def main():
     starting_health = 250
     p = Player(0, 0, (starting_health, 0, 0), starting_health)
     p2 = Player(450, 450, (0, starting_health, 0), starting_health)
-    bullet_state = "ready"
+    bullet = Bullet()
 
     while run:
         clock.tick(60)
@@ -32,28 +33,28 @@ def main():
         pygame.draw.rect(win, p.colors, p.get_dimensions())
         pygame.draw.rect(win, p2.colors, p2.get_dimensions())
 
-        if bullet_state is "ready":
-            bulletX = p2.x + 22.5
-            bulletY = p2.y
-            bulletX_change = playerX_change
-            bulletY_change = 6 + playerY_change
+        if bullet.is_ready():
+            bullet.x = p2.x + 22.5
+            bullet.y = p2.y
+            bullet.vel_x = playerX_change
+            bullet.vel_y = 6 + playerY_change
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE] and bullet_state is "ready":
-            bullet_state = "fire"
-            fireBullet(bulletX, bulletY)
+        if keys[pygame.K_SPACE] and bullet.is_ready():
+            bullet.ready = False
+            fireBullet(bullet.x, bullet.y)
 
-        if bullet_state is "fire":
-            fireBullet(bulletX, bulletY)
-            bulletX += bulletX_change
-            bulletY -= bulletY_change
-            if bulletX < 0 or bulletX > 500 or bulletY < 0:
-                bullet_state = "ready"
-            if bulletY + 5 >= p.y and bulletY < p.y + 50:
-                if bulletX + 5 >= p.x and bulletX < p.x + 50:
+        if not bullet.is_ready():
+            fireBullet(bullet.x, bullet.y)
+            bullet.x += bullet.vel_x
+            bullet.y -= bullet.vel_y
+            if bullet.x < 0 or bullet.x > 500 or bullet.y < 0:
+                bullet.ready = True
+            if bullet.y + 5 >= p.y and bullet.y < p.y + 50:
+                if bullet.x + 5 >= p.x and bullet.x < p.x + 50:
                     p.health -= 50
                     p.colors = (p.health, 0, 0)
-                    bullet_state = "ready"
+                    bullet.ready = True
 
         pygame.display.update()
 
