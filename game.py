@@ -13,14 +13,13 @@ pygame.display.set_caption("Dual")
 def main():
     run = True
     clock = pygame.time.Clock()
-    pHealth = 250
-    p2Health = 250
-    p = Player(0, 0, (pHealth, 0, 0))
-    p2 = Player(450, 450, (0, p2Health, 0))
+    starting_health = 250
+    p = Player(0, 0, (starting_health, 0, 0), starting_health)
+    p2 = Player(450, 450, (0, starting_health, 0), starting_health)
     bullet_state = "ready"
+
     while run:
         clock.tick(60)
-
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,13 +51,13 @@ def main():
                 bullet_state = "ready"
             if bulletY + 5 >= p.y and bulletY < p.y + 50:
                 if bulletX + 5 >= p.x and bulletX < p.x + 50:
-                    pHealth -= 50
-                    p.colors = (pHealth, 0, 0)
+                    p.health -= 50
+                    p.colors = (p.health, 0, 0)
                     bullet_state = "ready"
 
         pygame.display.update()
 
-        if pHealth <= 0:
+        if p.health <= 0:
             pygame.quit()
 
 
@@ -111,7 +110,7 @@ def movementY(p, p2):
 def fireBullet(x,y):
     #global bullet_state
     #bullet_state = "fire"
-    pygame.draw.rect(win, (0,255,0), (x, y, 5, 5))
+    pygame.draw.rect(win, (0, 255, 0), (x, y, 5, 5))
 
 
 main()
