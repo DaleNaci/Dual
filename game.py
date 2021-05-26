@@ -67,20 +67,20 @@ def movementX(p, p2):
     retVal = 0
 
     if keys[pygame.K_LEFT]:
-        if (p.x >= p.vel):
-            p.x -= p.vel
+        if (p.x >= p.vel_x):
+            p.x -= p.vel_x
     if keys[pygame.K_RIGHT]:
-        if (p.x <= 450-p.vel):
-            p.x += p.vel
+        if (p.x <= 450-p.vel_x):
+            p.x += p.vel_x
 
     if keys[pygame.K_a]:
-        if (p2.x >= p.vel):
-            p2.x -= p2.vel
-            retVal = -p2.vel
+        if (p2.x >= p.vel_x):
+            p2.x -= p2.vel_x
+            retVal = -p2.vel_x
     if keys[pygame.K_d]:
-        if (p2.x <= 450-p.vel):
-            p2.x += p2.vel
-            retVal = p2.vel
+        if (p2.x <= 450-p.vel_x):
+            p2.x += p2.vel_x
+            retVal = p2.vel_x
 
     return retVal
 
@@ -90,20 +90,20 @@ def movementY(p, p2):
     retVal = 0
 
     if keys[pygame.K_DOWN]:
-        if (p.y <= 200-p.vel):
-            p.y += p.vel
+        if (p.y <= 200-p.vel_y):
+            p.y += p.vel_y
     if keys[pygame.K_UP]:
-        if (p.y >= p.vel):
-            p.y -= p.vel
+        if (p.y >= p.vel_y):
+            p.y -= p.vel_y
 
     if keys[pygame.K_s]:
-        if (p2.y <= 450-p.vel):
-            p2.y += p2.vel
-            retVal = -p2.vel/2
+        if (p2.y <= 450-p.vel_y):
+            p2.y += p2.vel_y
+            retVal = -p2.vel_y/2
     if keys[pygame.K_w]:
-        if (p2.y >= 250+p.vel):
-            p2.y -= p2.vel
-            retVal = p2.vel/2
+        if (p2.y >= 250+p.vel_y):
+            p2.y -= p2.vel_y
+            retVal = p2.vel_y/2
 
     return retVal
 
