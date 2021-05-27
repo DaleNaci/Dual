@@ -108,9 +108,7 @@ def movementY(p, p2):
     return retVal
 
 
-def drawBullet(x,y):
-    #global bullet_state
-    #bullet_state = "fire"
+def drawBullet(x, y):
     pygame.draw.rect(win, (0, 255, 0), (x, y, 5, 5))
 
 
