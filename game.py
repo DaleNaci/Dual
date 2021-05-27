@@ -42,10 +42,10 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and bullet.is_ready():
             bullet.ready = False
-            fireBullet(bullet.x, bullet.y)
+            drawBullet(bullet.x, bullet.y)
 
         if not bullet.is_ready():
-            fireBullet(bullet.x, bullet.y)
+            drawBullet(bullet.x, bullet.y)
             bullet.x += bullet.vel_x
             bullet.y -= bullet.vel_y
             if bullet.x < 0 or bullet.x > 500 or bullet.y < 0:
@@ -108,7 +108,7 @@ def movementY(p, p2):
     return retVal
 
 
-def fireBullet(x,y):
+def drawBullet(x,y):
     #global bullet_state
     #bullet_state = "fire"
     pygame.draw.rect(win, (0, 255, 0), (x, y, 5, 5))
