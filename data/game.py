@@ -34,10 +34,12 @@ def main():
         p2.draw()
 
         if bullet.is_ready():
-            bullet.x = p2.x + 22.5
-            bullet.y = p2.y
-            bullet.vel_x = playerX_change
-            bullet.vel_y = 6 + playerY_change
+            bullet.set_movement(
+                p2.x + 22.5,
+                p2.y,
+                playerX_change,
+                playerY_change + 6
+            )
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and bullet.is_ready():
@@ -46,10 +48,7 @@ def main():
 
         if not bullet.is_ready():
             bullet.draw()
-            bullet.x += bullet.vel_x
-            bullet.y -= bullet.vel_y
-            if bullet.x < 0 or bullet.x > 500 or bullet.y < 0:
-                bullet.ready = True
+            bullet.move()
             if bullet.y + 5 >= p.y and bullet.y < p.y + 50:
                 if bullet.x + 5 >= p.x and bullet.x < p.x + 50:
                     p.health -= 50
