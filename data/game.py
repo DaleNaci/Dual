@@ -1,7 +1,7 @@
 import pygame
 
-from player import Player
-from bullet import Bullet
+from .components.player import Player
+from .components.bullet import Bullet
 
 
 SCREEN_WIDTH = 500

@@ -1,7 +1,6 @@
 import pygame
 
-from network import Network
-from player import Player
+from . import Network, Player
 
 
 SCREEN_WIDTH = 500
