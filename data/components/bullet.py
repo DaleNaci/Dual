@@ -9,3 +9,7 @@ class Bullet(GameObject):
 
     def is_ready(self):
         return self.ready
+
+
+    def draw(self):
+        pass

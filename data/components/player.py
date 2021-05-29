@@ -1,3 +1,5 @@
+import pygame
+
 from .game_object import GameObject
 
 
@@ -9,3 +11,7 @@ class Player(GameObject):
 
     def get_dimensions(self):
         return (self.x, self.y, self.width, self.height)
+
+
+    def draw(self):
+        pass

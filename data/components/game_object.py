@@ -1,4 +1,7 @@
-class GameObject():
+from abc import ABC, abstractmethod
+
+
+class GameObject(ABC):
     def __init__(self, x, y, vel_x,
                  vel_y, width, height, colors):
         self.x = x
@@ -8,3 +11,8 @@ class GameObject():
         self.width = width
         self.height = height
         self.colors = colors
+
+
+    @abstractmethod
+    def draw(self):
+        pass
