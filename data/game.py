@@ -15,9 +15,9 @@ def main():
     run = True
     clock = pygame.time.Clock()
     starting_health = 250
-    p = Player(0, 0, (starting_health, 0, 0), starting_health)
-    p2 = Player(450, 450, (0, starting_health, 0), starting_health)
-    bullet = Bullet()
+    p = Player(win, 0, 0, (starting_health, 0, 0), starting_health)
+    p2 = Player(win, 450, 450, (0, starting_health, 0), starting_health)
+    bullet = Bullet(win)
 
     while run:
         clock.tick(60)
@@ -30,8 +30,8 @@ def main():
         playerY_change = movementY(p, p2)
 
         win.fill((0, 0, 0))
-        pygame.draw.rect(win, p.colors, p.get_dimensions())
-        pygame.draw.rect(win, p2.colors, p2.get_dimensions())
+        p.draw()
+        p2.draw()
 
         if bullet.is_ready():
             bullet.x = p2.x + 22.5
@@ -42,10 +42,10 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and bullet.is_ready():
             bullet.ready = False
-            drawBullet(bullet.x, bullet.y)
+            bullet.draw()
 
         if not bullet.is_ready():
-            drawBullet(bullet.x, bullet.y)
+            bullet.draw()
             bullet.x += bullet.vel_x
             bullet.y -= bullet.vel_y
             if bullet.x < 0 or bullet.x > 500 or bullet.y < 0:
@@ -106,10 +106,6 @@ def movementY(p, p2):
             retVal = p2.vel_y/2
 
     return retVal
-
-
-def drawBullet(x, y):
-    pygame.draw.rect(win, (0, 255, 0), (x, y, 5, 5))
 
 
 main()

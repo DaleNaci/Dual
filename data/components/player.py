@@ -4,9 +4,9 @@ from .game_object import GameObject
 
 
 class Player(GameObject):
-    def __init__(self, x, y, colors, health):
+    def __init__(self, win, x, y, colors, health):
         self.health = health
-        GameObject.__init__(self, x, y, 5, 5, 50, 50, colors)
+        GameObject.__init__(self, win, x, y, 5, 5, 50, 50, colors)
 
 
     def get_dimensions(self):
@@ -14,4 +14,4 @@ class Player(GameObject):
 
 
     def draw(self):
-        pass
+        pygame.draw.rect(self.win, self.colors, self.get_dimensions())
