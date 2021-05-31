@@ -1,10 +1,10 @@
 import sys
-import pygame as pg
+import pygame
 
 from data.game import main
 
 
 if __name__ == "__main__":
     main()
-    pg.quit()
+    pygame.quit()
     sys.exit()
