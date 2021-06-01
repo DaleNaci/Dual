@@ -26,8 +26,8 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-        playerX_change = movementX(p, p2)
-        playerY_change = movementY(p, p2)
+        p.move()
+        p2.move()
 
         win.fill((0, 0, 0))
         p.draw()
@@ -37,8 +37,8 @@ def main():
             bullet.set_movement(
                 p2.x + 22.5,
                 p2.y,
-                playerX_change,
-                playerY_change + 6
+                p2.velx,
+                6
             )
 
         keys = pygame.key.get_pressed()
@@ -59,52 +59,6 @@ def main():
 
         if p.health <= 0:
             pygame.quit()
-
-
-def movementX(p, p2):
-    keys = pygame.key.get_pressed()
-    retVal = 0
-
-    if keys[pygame.K_LEFT]:
-        if (p.x >= p.vel_x):
-            p.x -= p.vel_x
-    if keys[pygame.K_RIGHT]:
-        if (p.x <= 450-p.vel_x):
-            p.x += p.vel_x
-
-    if keys[pygame.K_a]:
-        if (p2.x >= p.vel_x):
-            p2.x -= p2.vel_x
-            retVal = -p2.vel_x
-    if keys[pygame.K_d]:
-        if (p2.x <= 450-p.vel_x):
-            p2.x += p2.vel_x
-            retVal = p2.vel_x
-
-    return retVal
-
-
-def movementY(p, p2):
-    keys = pygame.key.get_pressed()
-    retVal = 0
-
-    if keys[pygame.K_DOWN]:
-        if (p.y <= 200-p.vel_y):
-            p.y += p.vel_y
-    if keys[pygame.K_UP]:
-        if (p.y >= p.vel_y):
-            p.y -= p.vel_y
-
-    if keys[pygame.K_s]:
-        if (p2.y <= 450-p.vel_y):
-            p2.y += p2.vel_y
-            retVal = -p2.vel_y/2
-    if keys[pygame.K_w]:
-        if (p2.y >= 250+p.vel_y):
-            p2.y -= p2.vel_y
-            retVal = p2.vel_y/2
-
-    return retVal
 
 
 main()

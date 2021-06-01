@@ -3,7 +3,7 @@ from _thread import *
 import sys
 import pickle
 
-from . import Player
+from components.player import Player
 
 
 server = "192.168.1.244"
