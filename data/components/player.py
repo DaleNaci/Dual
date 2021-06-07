@@ -30,22 +30,13 @@ class Player(GameObject):
 
     def __set_vels(self):
         keys = pygame.key.get_pressed()
-        d = {}
+        d = {
+            "L": keys[pygame.K_a],
+            "R": keys[pygame.K_d],
+            "U": keys[pygame.K_w],
+            "D": keys[pygame.K_s]
+        }
 
-        if self.id == 1:
-            d = {
-                "L": keys[pygame.K_LEFT],
-                "R": keys[pygame.K_RIGHT],
-                "U": keys[pygame.K_UP],
-                "D": keys[pygame.K_DOWN]
-            }
-        elif self.id == 2:
-            d = {
-                "L": keys[pygame.K_a],
-                "R": keys[pygame.K_d],
-                "U": keys[pygame.K_w],
-                "D": keys[pygame.K_s]
-            }
 
         if d["L"] == d["R"]:
             self.velx = 0
