@@ -3,6 +3,7 @@ import pygame
 from .components.player import Player
 from .components.bullet import Bullet
 from .sockets.network import Network
+from .helper_functions import shoot
 
 
 SCREEN_WIDTH = 500
@@ -18,6 +19,8 @@ def main():
     p = n.getP()
     clock = pygame.time.Clock()
 
+    bullets = []
+
     while run:
         clock.tick(60)
 
@@ -27,11 +30,21 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            shoot(p)
+
         p.move(win)
 
         win.fill((0, 0, 0))
+
         p.draw(win)
         p2.draw(win)
+
+        for b in bullets:
+            b.move(win)
+            b.draw(win)
+
         pygame.display.update()
 
         if p.health <= 0:
