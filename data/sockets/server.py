@@ -24,8 +24,8 @@ def run_server():
 
     starting_health = 250
     players = [
-        Player(None, 0, 0, (starting_health, 0, 0), starting_health),
-        Player(None, 0, 0, (0, starting_health, 0), starting_health)
+        Player(0, 0, (starting_health, 0, 0), starting_health),
+        Player(0, 0, (0, starting_health, 0), starting_health)
     ]
 
 

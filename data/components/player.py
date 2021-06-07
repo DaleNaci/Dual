@@ -10,15 +10,14 @@ class Player(GameObject):
     MAX_SPEED_Y = 5
 
 
-    def __init__(self, win, x, y, colors, health):
+    def __init__(self, x, y, colors, health):
         self.id = next(self._ids)
         self.health = health
-        GameObject.__init__(self, None, x, y, 5, 5, 50, 50, colors)
+        GameObject.__init__(self, x, y, 5, 5, 50, 50, colors)
 
 
     def __str__(self):
         s = f"id: {self.id}\n" \
-            + f"win: {self.win}\n" \
             + f"x: {self.x}\n" \
             + f"y: {self.y}\n" \
             + f"vel x: {self.velx}\n" \

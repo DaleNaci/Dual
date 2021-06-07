@@ -4,13 +4,13 @@ from .game_object import GameObject
 
 
 class Bullet(GameObject):
-    def __init__(self, win):
+    def __init__(self):
         self.ready = True
-        GameObject.__init__(self, win, 0, 0, 0, 0, 5, 5, (0, 255, 0))
+        GameObject.__init__(self, 0, 0, 0, 0, 5, 5, (0, 255, 0))
 
 
-    def draw(self):
-        pygame.draw.rect(self.win, self.colors, self.get_dimensions())
+    def draw(self, win):
+        pygame.draw.rect(win, self.colors, self.get_dimensions())
 
 
     def move(self):
@@ -36,6 +36,6 @@ class Bullet(GameObject):
         return (self.x, self.y, self.width, self.height)
 
 
-    def inbounds(self):
-        w, h = self.win.get_size()
+    def inbounds(self, win):
+        w, h = win.get_size()
         return (0 < self.x < w) and (0 < self.y < h)
