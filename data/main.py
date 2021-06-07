@@ -20,6 +20,7 @@ def main():
     clock = pygame.time.Clock()
 
     bullets = []
+    shoot_reset = True
 
     while run:
         clock.tick(60)
@@ -31,8 +32,11 @@ def main():
                 run = False
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and shoot_reset:
             bullets.append(shoot(p))
+            shoot_reset = False
+        else:
+            shoot_reset = True
 
         p.move(win)
 
