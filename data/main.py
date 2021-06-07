@@ -32,7 +32,7 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            shoot(p)
+            bullets.append(shoot(p))
 
         p.move(win)
 
