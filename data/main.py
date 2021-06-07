@@ -1,17 +1,18 @@
 import pygame
 
-from . import Network, Player
+from .components.player import Player
+from .components.bullet import Bullet
+from .sockets.network import Network
 
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
 
 
-win = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Dual")
-
-
 def main():
+    win = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Dual")
+
     run = True
     n = Network()
     p = n.getP()
@@ -26,21 +27,12 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_LEFT]:
-            p.x -= p.vel
-        if keys[pygame.K_RIGHT]:
-            p.x += p.vel
-        if keys[pygame.K_DOWN]:
-            p.y += p.vel
-        if keys[pygame.K_UP]:
-            p.y -= p.vel
+        p.move(win)
 
         win.fill((0, 0, 0))
-        pygame.draw.rect(win, p.colors, p.get_dimensions())
-        pygame.draw.rect(win, p2.colors, p2.get_dimensions())
+        p.draw(win)
+        p2.draw(win)
         pygame.display.update()
 
-
-main()
+        if p.health <= 0:
+            pygame.quit()

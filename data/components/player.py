@@ -13,7 +13,20 @@ class Player(GameObject):
     def __init__(self, win, x, y, colors, health):
         self.id = next(self._ids)
         self.health = health
-        GameObject.__init__(self, win, x, y, 5, 5, 50, 50, colors)
+        GameObject.__init__(self, None, x, y, 5, 5, 50, 50, colors)
+
+
+    def __str__(self):
+        s = f"id: {self.id}\n" \
+            + f"win: {self.win}\n" \
+            + f"x: {self.x}\n" \
+            + f"y: {self.y}\n" \
+            + f"vel x: {self.velx}\n" \
+            + f"vel y: {self.vely}\n" \
+            + f"width: {self.width}\n" \
+            + f"height: {self.height}\n" \
+            + f"colors: {self.colors}\n"
+        return s
 
 
     def __set_vels(self):
@@ -50,8 +63,8 @@ class Player(GameObject):
             self.vely = -self.MAX_SPEED_Y
 
 
-    def __get_bounds(self):
-        w, h = self.win.get_size()
+    def __get_bounds(self, win):
+        w, h = win.get_size()
         bounds = {
             "L": 0,
             "R": w - self.width
@@ -71,17 +84,17 @@ class Player(GameObject):
         return (self.x, self.y, self.width, self.height)
 
 
-    def draw(self):
-        pygame.draw.rect(self.win, self.colors, self.get_dimensions())
+    def draw(self, win):
+        pygame.draw.rect(win, self.colors, self.get_dimensions())
 
 
-    def move(self):
+    def move(self, win):
         self.__set_vels()
 
         self.x += self.velx
         self.y += self.vely
 
-        bounds = self.__get_bounds()
+        bounds = self.__get_bounds(win)
 
         if self.x < bounds["L"]:
             self.x = bounds["L"]
