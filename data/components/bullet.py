@@ -13,11 +13,11 @@ class Bullet(GameObject):
         pygame.draw.rect(win, self.colors, self.get_dimensions())
 
 
-    def move(self):
+    def move(self, win):
         self.x += self.vel_x
         self.y -= self.vel_y
 
-        if not self.inbounds():
+        if not self.inbounds(win):
             self.ready = True
 
 
