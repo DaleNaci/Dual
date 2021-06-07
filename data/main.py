@@ -35,7 +35,7 @@ def main():
         if keys[pygame.K_SPACE] and shoot_reset:
             bullets.append(shoot(p))
             shoot_reset = False
-        else:
+        elif not keys[pygame.K_SPACE]:
             shoot_reset = True
 
         p.move(win)
