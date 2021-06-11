@@ -16,16 +16,16 @@ def main():
 
     run = True
     n = Network()
-    p = n.getP()
+    p, bullets = n.getP()
     clock = pygame.time.Clock()
 
-    bullets = []
+    # bullets = []
     shoot_reset = True
 
     while run:
         clock.tick(60)
 
-        p2 = n.send(p)
+        p2, bullets = n.send(p)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,6 +48,9 @@ def main():
         for b in bullets:
             b.move(win)
             b.draw(win)
+
+            if p.get_rect().colliderect(b.get_rect()):
+                print("Here")
 
         pygame.display.update()
 

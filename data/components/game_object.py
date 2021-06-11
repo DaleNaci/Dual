@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import pygame
 
 
 class GameObject(ABC):
@@ -16,3 +17,7 @@ class GameObject(ABC):
     @abstractmethod
     def draw(self):
         pass
+
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.width, self.height)
