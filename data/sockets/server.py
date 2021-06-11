@@ -28,18 +28,17 @@ def run_server():
         Player(0, 0, (starting_health, 0, 0), starting_health),
         Player(0, 0, (0, starting_health, 0), starting_health)
     ]
-    bullets = []
 
 
     def threaded_client(conn, currentPlayer):
-        conn.send(pickle.dumps((players[currentPlayer], bullets)))
+        conn.send(pickle.dumps(players[currentPlayer]))
 
         reply = ""
 
         while True:
             try:
                 data = pickle.loads(conn.recv(2048))
-                players[currentPlayer], bullets = data
+                players[currentPlayer] = data
 
                 if not data:
                     print("Disconnected")
@@ -50,7 +49,7 @@ def run_server():
                     else:
                         reply = players[1]
 
-                conn.sendall(pickle.dumps((reply, bullets)))
+                conn.sendall(pickle.dumps(reply))
             except:
                 break
 
